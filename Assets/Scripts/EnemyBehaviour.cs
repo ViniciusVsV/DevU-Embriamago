@@ -22,6 +22,10 @@ public class EnemyBehaviour : MonoBehaviour{
         transform.position = newPosition;
 
         if(transform.position.z <= -9.772){
+            PlayerMovement player = FindObjectOfType<PlayerMovement>();
+            if(player != null)
+                player.DecreaseHealth();
+
             Destroy(gameObject);
         }
     }

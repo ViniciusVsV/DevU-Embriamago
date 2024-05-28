@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour{
     public Transform[] routes;
@@ -26,7 +27,7 @@ public class PlayerMovement : MonoBehaviour{
         HandleShooting();
 
         if(health == 0)
-            Debug.Log("Morreu zé");
+            GameOver();
     }
 
     //Mecânica de Movimento do Player
@@ -64,5 +65,13 @@ public class PlayerMovement : MonoBehaviour{
         else if(currentRouteIndex == 1)
             Instantiate(projectilePrefabCenter, projectileSpawn.position, Quaternion.identity);
     }
-    
+
+    public void DecreaseHealth(){
+        health--;
+    }
+
+    void GameOver(){
+        Debug.Log("Game Over!");
+        UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
+    }
 }
