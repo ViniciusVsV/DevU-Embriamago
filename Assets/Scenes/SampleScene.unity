@@ -465,8 +465,6 @@ MonoBehaviour:
   enemyPrefab0: {fileID: 5980373380102268817, guid: 3c320991c8be52448a1f4561465e3d06, type: 3}
   enemyPrefab1: {fileID: 5992195557942319157, guid: 66c0abbfccd6e484da745e0e39e2ae6e, type: 3}
   enemyPrefab2: {fileID: 7718261828024671817, guid: ffbe1307992bf3a40a4bb7d60683beea, type: 3}
-  speed: 5
-  spawnInterval: 1
 --- !u!4 &650011554
 Transform:
   m_ObjectHideFlags: 0
