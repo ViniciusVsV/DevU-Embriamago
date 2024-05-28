@@ -20,4 +20,8 @@ public class Score : MonoBehaviour{
     void UpdateScoreText(){
         scoreText.text = "Score: " + scoreValue.ToString();
     }
+
+    public int getScore(){
+        return scoreValue;
+    }
 }

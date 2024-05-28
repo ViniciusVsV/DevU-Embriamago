@@ -6,8 +6,7 @@ public class EnemySpawn : MonoBehaviour{
     public GameObject enemyPrefab1;
     public GameObject enemyPrefab2;
 
-    public float speed = 5f;
-    public float spawnInterval = 2f;
+    private float spawnInterval = 2f;
     private float spawnTimer = 0f;
 
     void Update(){
@@ -27,5 +26,9 @@ public class EnemySpawn : MonoBehaviour{
                 GameObject enemy = Instantiate(enemyPrefab2, spawnPoint.position, Quaternion.identity);
             }
         }
+    }
+
+    public void setSpawnInterval(float newSpawnInterval){
+        spawnInterval = newSpawnInterval;
     }
 }

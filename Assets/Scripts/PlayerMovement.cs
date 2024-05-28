@@ -33,13 +33,18 @@ public class PlayerMovement : MonoBehaviour{
 
     //Mecânica de Movimento do Player
     void HandleMovement(){
-        if(Input.GetKeyDown(KeyCode.A) && currentRouteIndex > 0){
-            currentRouteIndex--;
+        if(Input.GetKeyDown(KeyCode.A)){
+            currentRouteIndex = 0;
             MoveToRoute();
         }
 
-        else if(Input.GetKeyDown(KeyCode.D) && currentRouteIndex < 2){
-            currentRouteIndex++;
+        else if(Input.GetKeyDown(KeyCode.S)){
+            currentRouteIndex = 1;
+            MoveToRoute();
+        }
+
+        else if(Input.GetKeyDown(KeyCode.D)){
+            currentRouteIndex = 2;
             MoveToRoute();
         }
     }
