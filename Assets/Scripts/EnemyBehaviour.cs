@@ -4,7 +4,7 @@ public class EnemyBehaviour : MonoBehaviour{
     public float targetX;
     public float targetZ;
     public float targetY;
-    public float speed = 8f;
+    private float speed = 8f;
 
     private Transform target;
     
@@ -28,5 +28,9 @@ public class EnemyBehaviour : MonoBehaviour{
 
             Destroy(gameObject);
         }
+    }
+
+    public void setSpeed(float newSpeed){
+        speed = newSpeed;
     }
 }

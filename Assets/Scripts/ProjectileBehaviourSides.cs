@@ -28,5 +28,8 @@ public class ProjectileBehaviourSides : MonoBehaviour{
     void OnCollisionEnter(Collision collision){
         Destroy(collision.gameObject);
         Destroy(gameObject); 
+
+        Score score = FindAnyObjectByType<Score>();
+        score.AddScore();
     }
 }

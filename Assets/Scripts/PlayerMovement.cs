@@ -1,5 +1,5 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class PlayerMovement : MonoBehaviour{
     public Transform[] routes;
@@ -13,13 +13,14 @@ public class PlayerMovement : MonoBehaviour{
     private float cooldownTimer = 0.5f;
 
     public int health = 3;
+    public GameObject[] healthBar; 
 
     void Start(){
         currentRouteIndex = 1;
+        StartCoroutine(ActivateHealthBars());
         Debug.Log("O jogo começou!");
     }
 
-    
     void Update(){
         cooldownTimer += Time.deltaTime;
 
@@ -32,13 +33,18 @@ public class PlayerMovement : MonoBehaviour{
 
     //Mecânica de Movimento do Player
     void HandleMovement(){
-        if(Input.GetKeyDown(KeyCode.A) && currentRouteIndex > 0){
-            currentRouteIndex--;
+        if(Input.GetKeyDown(KeyCode.A)){
+            currentRouteIndex = 0;
             MoveToRoute();
         }
 
-        else if(Input.GetKeyDown(KeyCode.D) && currentRouteIndex < 2){
-            currentRouteIndex++;
+        else if(Input.GetKeyDown(KeyCode.S)){
+            currentRouteIndex = 1;
+            MoveToRoute();
+        }
+
+        else if(Input.GetKeyDown(KeyCode.D)){
+            currentRouteIndex = 2;
             MoveToRoute();
         }
     }
@@ -65,13 +71,30 @@ public class PlayerMovement : MonoBehaviour{
         else if(currentRouteIndex == 1)
             Instantiate(projectilePrefabCenter, projectileSpawn.position, Quaternion.identity);
     }
-
+    
     public void DecreaseHealth(){
         health--;
+        if (health >= 0 && health < healthBar.Length)
+            healthBar[health].SetActive(false);
+
+        EnemyBehaviour[] allEnemies = FindObjectsOfType<EnemyBehaviour>();
+        foreach(EnemyBehaviour enemy in allEnemies)
+            Destroy(enemy.gameObject);
     }
 
     void GameOver(){
         Debug.Log("Game Over!");
         UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
+    }
+
+    // Corrotina para ativar as barras de vida com um intervalo
+    IEnumerator ActivateHealthBars(){
+        foreach (GameObject bar in healthBar){
+            bar.SetActive(true);
+            // Espera por 1 frame
+            yield return new WaitForSeconds(0.5f);
+            // Espera por um tempo específico (e.g., 0.5 segundos)
+            // yield return new WaitForSeconds(0.5f);
+        }
     }
 }
