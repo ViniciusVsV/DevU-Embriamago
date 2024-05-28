@@ -71,6 +71,10 @@ public class PlayerMovement : MonoBehaviour{
         health--;
         if (health >= 0 && health < healthBar.Length)
             healthBar[health].SetActive(false);
+
+        EnemyBehaviour[] allEnemies = FindObjectsOfType<EnemyBehaviour>();
+        foreach(EnemyBehaviour enemy in allEnemies)
+            Destroy(enemy.gameObject);
     }
 
     void GameOver(){
