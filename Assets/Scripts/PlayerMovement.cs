@@ -9,8 +9,8 @@ public class PlayerMovement : MonoBehaviour{
     public Transform projectileSpawn;
 
     private int currentRouteIndex;
-    private float attackCooldown = 0.5f;
-    private float cooldownTimer = 0.5f;
+    private float cooldownTimer = 0;
+    private bool allowShoot = true;
 
     public int health = 3;
     public GameObject[] healthBar; 
@@ -35,17 +35,17 @@ public class PlayerMovement : MonoBehaviour{
     void HandleMovement(){
         if(Input.GetKeyDown(KeyCode.A)){
             currentRouteIndex = 0;
-            MoveToRoute();
+            StartCoroutine(MoveAfterDelay());
         }
 
         else if(Input.GetKeyDown(KeyCode.S)){
             currentRouteIndex = 1;
-            MoveToRoute();
+            StartCoroutine(MoveAfterDelay());
         }
 
         else if(Input.GetKeyDown(KeyCode.D)){
             currentRouteIndex = 2;
-            MoveToRoute();
+            StartCoroutine(MoveAfterDelay());
         }
     }
 
@@ -55,9 +55,13 @@ public class PlayerMovement : MonoBehaviour{
 
     //Mecânica de Ataque
     void HandleShooting(){
-        if((Input.GetKeyDown(KeyCode.Space) && cooldownTimer >= attackCooldown) || (Input.GetKeyDown(KeyCode.Mouse0) && cooldownTimer >= attackCooldown)){
-            cooldownTimer = 0;
-            Shoot();
+        Levels levels = FindAnyObjectByType<Levels>();
+
+        if(allowShoot == true){
+            if((Input.GetMouseButton(0) && cooldownTimer >= levels.attackCooldown) || (Input.GetKey(KeyCode.Space) && cooldownTimer >= levels.attackCooldown)){
+                cooldownTimer = 0;
+                Shoot();
+            }
         }
     }
 
@@ -77,9 +81,15 @@ public class PlayerMovement : MonoBehaviour{
         if (health >= 0 && health < healthBar.Length)
             healthBar[health].SetActive(false);
 
-        EnemyBehaviour[] allEnemies = FindObjectsOfType<EnemyBehaviour>();
-        foreach(EnemyBehaviour enemy in allEnemies)
-            Destroy(enemy.gameObject);
+        EnemySpawn enemySpawn = FindAnyObjectByType<EnemySpawn>();
+        StartCoroutine(enemySpawn.DelaySpawn());
+
+        GameObject[] allEnemies = GameObject.FindGameObjectsWithTag("Enemy");
+        foreach(GameObject enemy in allEnemies)
+            Destroy(enemy);
+
+        DamageController takeDamage = FindAnyObjectByType<DamageController>();
+        StartCoroutine(takeDamage.TakeDamageEffect());
     }
 
     void GameOver(){
@@ -96,5 +106,15 @@ public class PlayerMovement : MonoBehaviour{
             // Espera por um tempo específico (e.g., 0.5 segundos)
             // yield return new WaitForSeconds(0.5f);
         }
+    }
+
+    IEnumerator MoveAfterDelay(){
+        Levels levels = FindAnyObjectByType<Levels>();
+        allowShoot = false;
+
+        yield return new WaitForSeconds(levels.moveDelay);
+
+        MoveToRoute();
+        allowShoot = true;
     }
 }

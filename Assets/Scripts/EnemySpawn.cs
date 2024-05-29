@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class EnemySpawn : MonoBehaviour{
@@ -6,29 +7,40 @@ public class EnemySpawn : MonoBehaviour{
     public GameObject enemyPrefab1;
     public GameObject enemyPrefab2;
 
-    private float spawnInterval = 2f;
     private float spawnTimer = 0f;
+    private bool wait = false;
 
     void Update(){
-        spawnTimer += Time.deltaTime;
-        
-        if(spawnTimer >= spawnInterval){
-            spawnTimer = 0f;
+        Spawn();
+    }
 
-            int spawnIndex = Random.Range(0, spawnPoints.Length);
-            Transform spawnPoint = spawnPoints[spawnIndex];
+    void Spawn(){
+        if(wait == true){
+            
+        }else{
+            Levels levels = FindAnyObjectByType<Levels>();
+            spawnTimer += Time.deltaTime;
+            
+            if(spawnTimer >= levels.spawnInterval){
+                spawnTimer = 0f;
 
-            if(spawnIndex == 0){
-                GameObject enemy = Instantiate(enemyPrefab0, spawnPoint.position, Quaternion.identity);
-            }else if(spawnIndex == 1){
-                GameObject enemy = Instantiate(enemyPrefab1, spawnPoint.position, Quaternion.identity);
-            }else if(spawnIndex == 2){
-                GameObject enemy = Instantiate(enemyPrefab2, spawnPoint.position, Quaternion.identity);
+                int spawnIndex = Random.Range(0, spawnPoints.Length);
+                Transform spawnPoint = spawnPoints[spawnIndex];
+
+                if(spawnIndex == 0){
+                    GameObject enemy = Instantiate(enemyPrefab0, spawnPoint.position, Quaternion.identity);
+                }else if(spawnIndex == 1){
+                    GameObject enemy = Instantiate(enemyPrefab1, spawnPoint.position, Quaternion.identity);
+                }else if(spawnIndex == 2){
+                    GameObject enemy = Instantiate(enemyPrefab2, spawnPoint.position, Quaternion.identity);
+                }
             }
         }
     }
 
-    public void setSpawnInterval(float newSpawnInterval){
-        spawnInterval = newSpawnInterval;
+    public IEnumerator DelaySpawn(){
+        wait = true;
+        yield return new WaitForSeconds(2);
+        wait = false;
     }
 }
