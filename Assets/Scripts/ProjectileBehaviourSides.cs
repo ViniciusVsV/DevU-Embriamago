@@ -5,7 +5,7 @@ public class ProjectileBehaviourSides : MonoBehaviour{
     public float targetZ;
     public float targetY;
     public float speed = 10f;
-    public float lifetime = 2f;
+    public float lifetime = 0.2f;
 
     private Transform target;
 

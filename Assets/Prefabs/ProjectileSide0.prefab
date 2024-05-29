@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 4057444011700382113}
   - component: {fileID: 5594871887007161835}
   - component: {fileID: 5989490554551285967}
-  - component: {fileID: 1407968486739985086}
   - component: {fileID: 2819748842469705418}
   - component: {fileID: 3219965841995705286}
+  - component: {fileID: 6963007093132484039}
   m_Layer: 0
   m_Name: ProjectileSide0
   m_TagString: Untagged
@@ -103,27 +103,6 @@ MonoBehaviour:
   _data:
     _json: '{"declarations":{"Kind":"Object","collection":{"$content":[],"$version":"A"},"$version":"A"}}'
     _objectReferences: []
---- !u!65 &1407968486739985086
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 181087369469059827}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.7400002, y: 0.42, z: 0.3}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &2819748842469705418
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -150,7 +129,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!114 &3219965841995705286
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -167,4 +146,25 @@ MonoBehaviour:
   targetZ: 50
   targetY: 0.62
   speed: 10
-  lifetime: 2
+  lifetime: 0.7
+--- !u!135 &6963007093132484039
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 181087369469059827}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.4200001
+  m_Center: {x: 0, y: 0, z: 0}
