@@ -10,6 +10,7 @@ public class Levels : MonoBehaviour{
 
     private bool isInsane = false;
     private bool isImpossible = false;
+    private bool isHard = false;
   
     void Start(){
         setDificultyStart();
@@ -58,6 +59,12 @@ public class Levels : MonoBehaviour{
     }
     
     void setDificultyHard(){
+        if(isHard == false){
+            SpeedLinesController speedLines = FindAnyObjectByType<SpeedLinesController>();
+            speedLines.startSpeedLines(1);
+        }
+        isHard = true;
+
         spawnInterval = 0.4f;
         enemySpeed = 20f;
         attackCooldown = 0.3f;
@@ -67,7 +74,7 @@ public class Levels : MonoBehaviour{
     void setDificultyInsane(){
         if(isInsane == false){
             SpeedLinesController speedLines = FindAnyObjectByType<SpeedLinesController>();
-            speedLines.startSpeedLines();
+            speedLines.startSpeedLines(2);
         }
         isInsane = true;
 
@@ -83,7 +90,7 @@ public class Levels : MonoBehaviour{
     void setDificultyImpossible(){
         if(isImpossible == false){
             SpeedLinesController speedLines = FindAnyObjectByType<SpeedLinesController>();
-            speedLines.startSpeedLines();
+            speedLines.startSpeedLines(3);
         }
         isImpossible = true;
 
