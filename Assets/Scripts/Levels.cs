@@ -92,6 +92,9 @@ public class Levels : MonoBehaviour{
         yield return new WaitForSeconds(4f);
         obj.SetActive(false);
 
+        TextWobble textWobble = FindAnyObjectByType<TextWobble>();
+        textWobble.wobble = true;
+
         spawnInterval = 0.7f;
         enemySpeed = 17f;
         attackCooldown = 0.5f;
