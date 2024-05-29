@@ -38,9 +38,9 @@ public class EnemySpawn : MonoBehaviour{
         }
     }
 
-    public IEnumerator DelaySpawn(){
+    public IEnumerator DelaySpawn(int delayTime){
         wait = true;
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(delayTime);
         wait = false;
     }
 }

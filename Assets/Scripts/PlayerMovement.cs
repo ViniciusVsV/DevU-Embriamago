@@ -82,29 +82,25 @@ public class PlayerMovement : MonoBehaviour{
             healthBar[health].SetActive(false);
 
         EnemySpawn enemySpawn = FindAnyObjectByType<EnemySpawn>();
-        StartCoroutine(enemySpawn.DelaySpawn());
+        StartCoroutine(enemySpawn.DelaySpawn(2));
 
         GameObject[] allEnemies = GameObject.FindGameObjectsWithTag("Enemy");
         foreach(GameObject enemy in allEnemies)
             Destroy(enemy);
 
         DamageController takeDamage = FindAnyObjectByType<DamageController>();
-        StartCoroutine(takeDamage.TakeDamageEffect());
+        StartCoroutine(takeDamage.TakeDamageEffect(0.5f));
     }
 
     void GameOver(){
         Debug.Log("Game Over!");
         UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
     }
-
-    // Corrotina para ativar as barras de vida com um intervalo
+    
     IEnumerator ActivateHealthBars(){
         foreach (GameObject bar in healthBar){
             bar.SetActive(true);
-            // Espera por 1 frame
             yield return new WaitForSeconds(0.5f);
-            // Espera por um tempo específico (e.g., 0.5 segundos)
-            // yield return new WaitForSeconds(0.5f);
         }
     }
 

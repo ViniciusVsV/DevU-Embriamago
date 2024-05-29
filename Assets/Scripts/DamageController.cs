@@ -17,14 +17,14 @@ public class DamageController : MonoBehaviour{
         vignette.enabled.Override(false);
     }
 
-    public IEnumerator TakeDamageEffect(){
+    public IEnumerator TakeDamageEffect(float waitTime){
         elapsedTime = 0f;
         intensity = 0.4f;
 
         vignette.enabled.Override(true);
         vignette.intensity.Override(0.5f);
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(waitTime);
 
         while(elapsedTime < 1f){
             elapsedTime += Time.deltaTime;
