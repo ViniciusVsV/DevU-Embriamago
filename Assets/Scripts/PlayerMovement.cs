@@ -61,6 +61,9 @@ public class PlayerMovement : MonoBehaviour{
             if((Input.GetMouseButton(0) && cooldownTimer >= levels.attackCooldown) || (Input.GetKey(KeyCode.Space) && cooldownTimer >= levels.attackCooldown)){
                 cooldownTimer = 0;
                 Shoot();
+
+                AudioController audioController = FindAnyObjectByType<AudioController>();
+                audioController.playAttackSound();
             }
         }
     }

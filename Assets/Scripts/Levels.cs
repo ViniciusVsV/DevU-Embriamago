@@ -3,8 +3,6 @@ using TMPro;
 using UnityEngine;
 
 public class Levels : MonoBehaviour{
-    private int currentScore = 0;
-    
     public float enemySpeed;
     public float attackCooldown;
     public float moveDelay;
@@ -21,28 +19,7 @@ public class Levels : MonoBehaviour{
         StartCoroutine(setDificultyStart(startingText.gameObject, 4f));
     }
 
-    void Update(){
-        Score score = FindAnyObjectByType<Score>();
-        currentScore = score.getScore();
-
-        if(currentScore == 500){
-            levelTransition(1);
-        }
-        else if(currentScore == 3500){
-            levelTransition(2);
-        }
-        else if(currentScore == 10000){
-            levelTransition(3);
-        }
-        else if(currentScore == 30000){
-            levelTransition(4);
-        }
-        else if(currentScore == 100000){
-            levelTransition(5);
-        }
-    }
-
-    void levelTransition(int selector){
+    public void levelTransition(int selector){
         EnemySpawn enemySpawn = FindAnyObjectByType<EnemySpawn>();
         StartCoroutine(enemySpawn.DelaySpawn(4));
         
@@ -102,17 +79,25 @@ public class Levels : MonoBehaviour{
     }
     
     IEnumerator setDificultyHard(GameObject obj, float delay){
+        AudioController audioController = FindAnyObjectByType<AudioController>();
+        StartCoroutine(audioController.stopMusic());
+
         obj.SetActive(true);
         yield return new WaitForSeconds(4f);
         obj.SetActive(false);
 
+        audioController.setMusicFast();
+
         SpeedLinesController speedLines = FindAnyObjectByType<SpeedLinesController>();
         speedLines.startSpeedLines(1);
-
         
         HeartVibration[] hearts = FindObjectsOfType<HeartVibration>(); 
         foreach(HeartVibration heart in hearts)
             heart.vibrate = true;
+
+        CameraController cameraController = FindAnyObjectByType<CameraController>();
+        cameraController.ShakeCamera(0.2f);
+        cameraController.IncreaseFOV(61f);
 
         spawnInterval = 0.4f;
         enemySpeed = 18f;
@@ -121,19 +106,25 @@ public class Levels : MonoBehaviour{
     }
 
     IEnumerator setDificultyInsane(GameObject obj, float delay){
+        AudioController audioController = FindAnyObjectByType<AudioController>();
+        StartCoroutine(audioController.stopMusic());
+
         obj.SetActive(true);
         yield return new WaitForSeconds(4f);
         obj.SetActive(false);
 
+        audioController.setMusicInsane();
+
         SpeedLinesController speedLines = FindAnyObjectByType<SpeedLinesController>();
         speedLines.startSpeedLines(2);
 
-        CameraShake cameraShake = FindAnyObjectByType<CameraShake>();
-        cameraShake.ShakeCamera();
+        CameraController cameraController = FindAnyObjectByType<CameraController>();
+        cameraController.ShakeCamera(0.6f);
+        cameraController.IncreaseFOV(62f);
 
         spawnInterval = 0.2f;
         enemySpeed = 23f;
-        attackCooldown = 0.2f;
+        attackCooldown = 0.1f;
         moveDelay = 0f;
     }
 
@@ -145,8 +136,9 @@ public class Levels : MonoBehaviour{
         SpeedLinesController speedLines = FindAnyObjectByType<SpeedLinesController>();
         speedLines.startSpeedLines(3);
 
-        CameraShake cameraShake = FindAnyObjectByType<CameraShake>();
-        cameraShake.ShakeCamera();
+        CameraController cameraController = FindAnyObjectByType<CameraController>();
+        cameraController.ShakeCamera(1f);
+        cameraController.IncreaseFOV(65f);
 
         spawnInterval = 0.2f;
         enemySpeed = 35f;

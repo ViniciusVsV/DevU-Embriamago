@@ -23,8 +23,10 @@ public class EnemyBehaviour : MonoBehaviour{
 
         if(transform.position.z <= -8.862){
             PlayerMovement player = FindObjectOfType<PlayerMovement>();
-            if(player != null)
-                player.DecreaseHealth();
+            player.DecreaseHealth();
+
+            AudioController audioController = FindAnyObjectByType<AudioController>();
+            audioController.playHitSound();
 
             Destroy(gameObject);
         }
