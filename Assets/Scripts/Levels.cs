@@ -3,8 +3,6 @@ using TMPro;
 using UnityEngine;
 
 public class Levels : MonoBehaviour{
-    private int currentScore = 0;
-    
     public float enemySpeed;
     public float attackCooldown;
     public float moveDelay;
@@ -60,9 +58,6 @@ public class Levels : MonoBehaviour{
         yield return new WaitForSeconds(4f);
         obj.SetActive(false);
 
-        MoveCamera moveCamera= FindAnyObjectByType<MoveCamera>();
-        StartCoroutine(MoveCameraBack(new Vector3(0, 0, -5f), 1f));
-
         spawnInterval = 1f;
         enemySpeed = 16f;
         attackCooldown = 0.6f;
@@ -95,11 +90,14 @@ public class Levels : MonoBehaviour{
 
         SpeedLinesController speedLines = FindAnyObjectByType<SpeedLinesController>();
         speedLines.startSpeedLines(1);
-
         
         HeartVibration[] hearts = FindObjectsOfType<HeartVibration>(); 
         foreach(HeartVibration heart in hearts)
             heart.vibrate = true;
+
+        CameraController cameraController = FindAnyObjectByType<CameraController>();
+        cameraController.ShakeCamera(0.2f);
+        cameraController.IncreaseFOV(61f);
 
         spawnInterval = 0.4f;
         enemySpeed = 18f;
@@ -120,11 +118,9 @@ public class Levels : MonoBehaviour{
         SpeedLinesController speedLines = FindAnyObjectByType<SpeedLinesController>();
         speedLines.startSpeedLines(2);
 
-        CameraShake cameraShake = FindAnyObjectByType<CameraShake>();
-        cameraShake.ShakeCamera();
-
-        MoveCamera moveCamera= FindAnyObjectByType<MoveCamera>();
-        StartCoroutine(moveCamera.MoveCameraBack(new Vector3(0, 0, -5f), 1f));
+        CameraController cameraController = FindAnyObjectByType<CameraController>();
+        cameraController.ShakeCamera(0.6f);
+        cameraController.IncreaseFOV(62f);
 
         spawnInterval = 0.2f;
         enemySpeed = 23f;
@@ -140,30 +136,13 @@ public class Levels : MonoBehaviour{
         SpeedLinesController speedLines = FindAnyObjectByType<SpeedLinesController>();
         speedLines.startSpeedLines(3);
 
-        CameraShake cameraShake = FindAnyObjectByType<CameraShake>();
-        cameraShake.ShakeCamera();
-
-        MoveCamera moveCamera= FindAnyObjectByType<MoveCamera>();
-        StartCoroutine(moveCamera.MoveCameraBack(new Vector3(0, 0, -10f), 1f));
+        CameraController cameraController = FindAnyObjectByType<CameraController>();
+        cameraController.ShakeCamera(1f);
+        cameraController.IncreaseFOV(65f);
 
         spawnInterval = 0.2f;
         enemySpeed = 35f;
         attackCooldown = 0.1f;
         moveDelay = 0f;
-    }
-
-    IEnumerator MoveCameraBack(Vector3 offset, float duration){
-        Camera mainCamera = Camera.main;
-        Vector3 startPosition = mainCamera.transform.position;
-        Vector3 endPosition = startPosition + offset;
-        float elapsedTime = 0f;
-
-        while (elapsedTime < duration){
-            mainCamera.transform.position = Vector3.Lerp(startPosition, endPosition, elapsedTime / duration);
-            elapsedTime += Time.deltaTime;
-            yield return null;
-        }
-
-        mainCamera.transform.position = endPosition;
     }
 }

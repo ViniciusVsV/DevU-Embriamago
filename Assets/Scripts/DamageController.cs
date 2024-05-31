@@ -4,12 +4,12 @@ using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
 
 public class DamageController : MonoBehaviour{
-    public float baseIntensity = 0.2f;
+    public float baseIntensity = 4f;
     public float damageIntensity = 0.5f; 
     public float fadeDuration = 1f; 
     private float elapsedTime = 0f;
 
-     PostProcessVolume volume;
+    PostProcessVolume volume;
     Vignette vignette;
 
     void Start(){
@@ -23,12 +23,10 @@ public class DamageController : MonoBehaviour{
     public IEnumerator TakeDamageEffect(float waitTime){
         elapsedTime = 0f;
 
-        // Intensify the vignette effect
         vignette.intensity.Override(damageIntensity);
 
         yield return new WaitForSeconds(waitTime);
 
-        // Fade back to the base intensity
         while (elapsedTime < fadeDuration){
             elapsedTime += Time.deltaTime;
 

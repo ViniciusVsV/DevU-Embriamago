@@ -2,9 +2,8 @@ using UnityEngine;
 using Cinemachine;
 using System.Collections;
 
-public class CameraShake : MonoBehaviour{
+public class CameraController : MonoBehaviour{
     private CinemachineVirtualCamera CinemachineVirtualCamera;
-    private float shakeIntensity = 1f;
     private CinemachineBasicMultiChannelPerlin _cbmcp;
 
     void Awake(){
@@ -13,9 +12,10 @@ public class CameraShake : MonoBehaviour{
 
     void Start(){
         StopShake();
+        IncreaseFOV(60f);
     }
 
-    public void ShakeCamera(){
+    public void ShakeCamera(float shakeIntensity){
         CinemachineBasicMultiChannelPerlin _cbmcp = CinemachineVirtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
         _cbmcp.m_AmplitudeGain = shakeIntensity;
     }
@@ -24,21 +24,9 @@ public class CameraShake : MonoBehaviour{
         CinemachineBasicMultiChannelPerlin _cbmcp = CinemachineVirtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
         _cbmcp.m_AmplitudeGain = 0f;
     }
-}
 
-public class MoveCamera : MonoBehaviour{
-    public IEnumerator MoveCameraBack(Vector3 offset, float duration){
-        Camera mainCamera = Camera.main;
-        Vector3 startPosition = mainCamera.transform.position;
-        Vector3 endPosition = startPosition + offset;
-        float elapsedTime = 0f;
-
-        while (elapsedTime < duration){
-            mainCamera.transform.position = Vector3.Lerp(startPosition, endPosition, elapsedTime / duration);
-            elapsedTime += Time.deltaTime;
-            yield return null;
-        }
-
-        mainCamera.transform.position = endPosition;
+    public void IncreaseFOV(float newFOV){
+        CinemachineVirtualCamera vCam = CinemachineVirtualCamera.GetComponent<CinemachineVirtualCamera>();
+        vCam.m_Lens.FieldOfView = newFOV;
     }
 }
