@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour{
     public Transform[] routes;
@@ -28,7 +29,9 @@ public class PlayerMovement : MonoBehaviour{
         HandleShooting();
 
         if(health == 0)
-            GameOver();
+        {
+            SceneManager.LoadScene("GameOver");
+        }
     }
 
     //Mecânica de Movimento do Player

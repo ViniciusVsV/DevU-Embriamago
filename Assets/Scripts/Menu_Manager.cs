@@ -7,6 +7,11 @@ public class Menu_Manager : MonoBehaviour
     [SerializeField] private string nome_do_level_jogo;
     [SerializeField] private GameObject painelMenuInicial;
     [SerializeField] private GameObject painelSettings;
+
+    
+    public GameObject PausePanel;
+    public bool isPaused;
+
     public void Play()
     {
         SceneManager.LoadScene("SampleScene");
@@ -25,4 +30,34 @@ public class Menu_Manager : MonoBehaviour
         Debug.Log("Sair do jogo");
         Application.Quit();
     }
+
+    void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            if(isPaused)
+            {
+                Continue();
+            }
+            else
+            {
+                Pause();                
+            }
+        }
+
+    }
+
+    public void Pause()
+    {
+        Time.timeScale = 0;
+        PausePanel.SetActive(true);
+        isPaused = true;
+    }
+    public void Continue()
+    {
+        Time.timeScale = 1;
+        PausePanel.SetActive(false);
+        isPaused = false;
+    }
 }
+
