@@ -10,16 +10,36 @@ public class ProjectileBehaviour : MonoBehaviour{
 
     void Update(){ 
         transform.Translate(speed * Time.deltaTime * Vector3.forward);
-    } 
+    }
 
-    void OnCollisionEnter(Collision collision){
-        Destroy(collision.gameObject);
-        Destroy(gameObject); 
+    void OnCollisionEnter(Collision collision)
+    {
+        Score score = FindObjectOfType<Score>();
+        AudioController audioController = FindObjectOfType<AudioController>();
 
-        AudioController audioController = FindAnyObjectByType<AudioController>();
-        audioController.playEnemyDeathSound();
+        if (audioController != null)
+        {
+            audioController.playEnemyDeathSound();
+        }
 
-        Score score = FindAnyObjectByType<Score>();
-        score.AddScore();
+
+        //Reduz a pontuação em 500 caso acerte civil
+        if (collision.gameObject.tag == "Civil")
+        {
+            Destroy(collision.gameObject);
+            Destroy(gameObject);
+            score.ReduceScore();
+        }
+        else
+        {
+            //Adiciona 100 pontos caso acerte inimigo
+            if (score != null)
+            {
+                Destroy(collision.gameObject);
+                Destroy(gameObject);
+
+                score.AddScore();
+            }
+        }
     }
 }

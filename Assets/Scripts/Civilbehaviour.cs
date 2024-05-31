@@ -25,11 +25,13 @@ public class CivilBehaviour : MonoBehaviour
         Vector3 newPosition = Vector3.MoveTowards(transform.position, target.position, levels.enemySpeed * Time.deltaTime);
         Score score = FindAnyObjectByType<Score>();
         transform.position = newPosition;
-
+        
         if (transform.position.z <= -8.862)
         {
             PlayerMovement player = FindObjectOfType<PlayerMovement>();
             if (player != null)
+                score.AddScore();
+                score.AddScore();
                 score.AddScore();
             Destroy(gameObject);
         }

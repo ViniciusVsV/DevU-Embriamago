@@ -11,6 +11,7 @@ public class EnemySpawn : MonoBehaviour
     public GameObject civilPrefab1;
     public GameObject civilPrefab2;
 
+    
 
     private float spawnTimer = 0f;
     private bool wait = false;
@@ -22,7 +23,7 @@ public class EnemySpawn : MonoBehaviour
 
     void Spawn()
     {
-
+        
 
         if (wait == true)
         {
