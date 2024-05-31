@@ -127,7 +127,7 @@ AudioMixerGroupController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Musica
+  m_Name: Music
   m_AudioMixer: {fileID: 24100000}
   m_GroupID: 18160f1cc3bd4784791bfbf75a67daaf
   m_Children: []
