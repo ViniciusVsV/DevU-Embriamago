@@ -21,28 +21,7 @@ public class Levels : MonoBehaviour{
         StartCoroutine(setDificultyStart(startingText.gameObject, 4f));
     }
 
-    void Update(){
-        Score score = FindAnyObjectByType<Score>();
-        currentScore = score.getScore();
-
-        if(currentScore == 500){
-            levelTransition(1);
-        }
-        else if(currentScore == 3500){
-            levelTransition(2);
-        }
-        else if(currentScore == 10000){
-            levelTransition(3);
-        }
-        else if(currentScore == 30000){
-            levelTransition(4);
-        }
-        else if(currentScore == 100000){
-            levelTransition(5);
-        }
-    }
-
-    void levelTransition(int selector){
+    public void levelTransition(int selector){
         EnemySpawn enemySpawn = FindAnyObjectByType<EnemySpawn>();
         StartCoroutine(enemySpawn.DelaySpawn(4));
         
