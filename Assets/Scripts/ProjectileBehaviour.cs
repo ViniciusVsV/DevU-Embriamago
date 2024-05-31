@@ -16,6 +16,9 @@ public class ProjectileBehaviour : MonoBehaviour{
         Destroy(collision.gameObject);
         Destroy(gameObject); 
 
+        AudioController audioController = FindAnyObjectByType<AudioController>();
+        audioController.playEnemyDeathSound();
+
         Score score = FindAnyObjectByType<Score>();
         score.AddScore();
     }

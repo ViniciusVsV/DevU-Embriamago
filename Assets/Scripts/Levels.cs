@@ -60,6 +60,9 @@ public class Levels : MonoBehaviour{
         yield return new WaitForSeconds(4f);
         obj.SetActive(false);
 
+        MoveCamera moveCamera= FindAnyObjectByType<MoveCamera>();
+        StartCoroutine(MoveCameraBack(new Vector3(0, 0, -5f), 1f));
+
         spawnInterval = 1f;
         enemySpeed = 16f;
         attackCooldown = 0.6f;
@@ -81,9 +84,14 @@ public class Levels : MonoBehaviour{
     }
     
     IEnumerator setDificultyHard(GameObject obj, float delay){
+        AudioController audioController = FindAnyObjectByType<AudioController>();
+        StartCoroutine(audioController.stopMusic());
+
         obj.SetActive(true);
         yield return new WaitForSeconds(4f);
         obj.SetActive(false);
+
+        audioController.setMusicFast();
 
         SpeedLinesController speedLines = FindAnyObjectByType<SpeedLinesController>();
         speedLines.startSpeedLines(1);
@@ -100,9 +108,14 @@ public class Levels : MonoBehaviour{
     }
 
     IEnumerator setDificultyInsane(GameObject obj, float delay){
+        AudioController audioController = FindAnyObjectByType<AudioController>();
+        StartCoroutine(audioController.stopMusic());
+
         obj.SetActive(true);
         yield return new WaitForSeconds(4f);
         obj.SetActive(false);
+
+        audioController.setMusicInsane();
 
         SpeedLinesController speedLines = FindAnyObjectByType<SpeedLinesController>();
         speedLines.startSpeedLines(2);
@@ -110,9 +123,12 @@ public class Levels : MonoBehaviour{
         CameraShake cameraShake = FindAnyObjectByType<CameraShake>();
         cameraShake.ShakeCamera();
 
+        MoveCamera moveCamera= FindAnyObjectByType<MoveCamera>();
+        StartCoroutine(moveCamera.MoveCameraBack(new Vector3(0, 0, -5f), 1f));
+
         spawnInterval = 0.2f;
         enemySpeed = 23f;
-        attackCooldown = 0.2f;
+        attackCooldown = 0.1f;
         moveDelay = 0f;
     }
 
@@ -127,9 +143,27 @@ public class Levels : MonoBehaviour{
         CameraShake cameraShake = FindAnyObjectByType<CameraShake>();
         cameraShake.ShakeCamera();
 
+        MoveCamera moveCamera= FindAnyObjectByType<MoveCamera>();
+        StartCoroutine(moveCamera.MoveCameraBack(new Vector3(0, 0, -10f), 1f));
+
         spawnInterval = 0.2f;
         enemySpeed = 35f;
         attackCooldown = 0.1f;
         moveDelay = 0f;
+    }
+
+    IEnumerator MoveCameraBack(Vector3 offset, float duration){
+        Camera mainCamera = Camera.main;
+        Vector3 startPosition = mainCamera.transform.position;
+        Vector3 endPosition = startPosition + offset;
+        float elapsedTime = 0f;
+
+        while (elapsedTime < duration){
+            mainCamera.transform.position = Vector3.Lerp(startPosition, endPosition, elapsedTime / duration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        mainCamera.transform.position = endPosition;
     }
 }
