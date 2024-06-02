@@ -1,7 +1,10 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.Timeline;
 
 public class PlayerMovement : MonoBehaviour{
+    public Animator animator;
+
     public Transform[] routes;
     public GameObject projectilePrefabCenter;
     public GameObject projectilePrefabSide0;
@@ -11,12 +14,14 @@ public class PlayerMovement : MonoBehaviour{
     private int currentRouteIndex;
     private float cooldownTimer = 0;
     private bool allowShoot = true;
+    private bool attacking = false;
 
     public int health = 3;
     public GameObject[] healthBar; 
 
     void Start(){
         currentRouteIndex = 1;
+        animator.SetInteger("Route", currentRouteIndex);
         StartCoroutine(ActivateHealthBars());
         Debug.Log("O jogo começou!");
     }
@@ -51,6 +56,7 @@ public class PlayerMovement : MonoBehaviour{
 
     void MoveToRoute(){
         transform.position = new Vector3(routes[currentRouteIndex].position.x, transform.position.y, transform.position.z);
+        animator.SetInteger("Route", currentRouteIndex);
     }
 
     //Mecânica de Ataque
@@ -69,14 +75,19 @@ public class PlayerMovement : MonoBehaviour{
     }
 
     void Shoot(){
-        if(currentRouteIndex == 0)
+        animator.SetTrigger("Attack");
+
+        if(currentRouteIndex == 0){
             Instantiate(projectilePrefabSide0, projectileSpawn.position, Quaternion.identity);
+        }
 
-        else if(currentRouteIndex == 2)
+        else if(currentRouteIndex == 2){
             Instantiate(projectilePrefabSide2, projectileSpawn.position, Quaternion.identity);
+        }
 
-        else if(currentRouteIndex == 1)
+        else if(currentRouteIndex == 1){
             Instantiate(projectilePrefabCenter, projectileSpawn.position, Quaternion.identity);
+        }
     }
     
     public void DecreaseHealth(){
@@ -97,7 +108,7 @@ public class PlayerMovement : MonoBehaviour{
 
     void GameOver(){
         Debug.Log("Game Over!");
-        UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
+        animator.SetTrigger("Death");
     }
     
     IEnumerator ActivateHealthBars(){

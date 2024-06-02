@@ -143,7 +143,7 @@ public class Levels : MonoBehaviour{
 
         CameraController cameraController = FindAnyObjectByType<CameraController>();
         cameraController.ShakeCamera(1f);
-        cameraController.IncreaseFOV(65f);
+        cameraController.IncreaseFOV(63f);
 
         spawnInterval = 0.2f;
         enemySpeed = 35f;
