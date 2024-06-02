@@ -1,8 +1,11 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using UnityEngine.Timeline;
 
 public class PlayerMovement : MonoBehaviour{
+    public Animator animator;
+
     public Transform[] routes;
     public GameObject projectilePrefabCenter;
     public GameObject projectilePrefabSide0;
@@ -16,12 +19,14 @@ public class PlayerMovement : MonoBehaviour{
     private int currentRouteIndex;
     private float cooldownTimer = 0;
     private bool allowShoot = true;
+    private bool attacking = false;
 
     public int health = 3;
     public GameObject[] healthBar; 
 
     void Start(){
         currentRouteIndex = 1;
+        animator.SetInteger("Route", currentRouteIndex);
         StartCoroutine(ActivateHealthBars());
         Debug.Log("O jogo começou!");
     }
@@ -58,6 +63,7 @@ public class PlayerMovement : MonoBehaviour{
 
     void MoveToRoute(){
         transform.position = new Vector3(routes[currentRouteIndex].position.x, transform.position.y, transform.position.z);
+        animator.SetInteger("Route", currentRouteIndex);
     }
 
     //Mecânica de Ataque
@@ -76,20 +82,27 @@ public class PlayerMovement : MonoBehaviour{
     }
 
     void Shoot(){
-        if(currentRouteIndex == 0)
+        animator.SetTrigger("Attack");
+
+        if(currentRouteIndex == 0){
             Instantiate(projectilePrefabSide0, projectileSpawn.position, Quaternion.identity);
+        }
 
-        else if(currentRouteIndex == 2)
+        else if(currentRouteIndex == 2){
             Instantiate(projectilePrefabSide2, projectileSpawn.position, Quaternion.identity);
+        }
 
-        else if(currentRouteIndex == 1)
+        else if(currentRouteIndex == 1){
             Instantiate(projectilePrefabCenter, projectileSpawn.position, Quaternion.identity);
+        }
     }
     
     public void DecreaseHealth(){
         health--;
-        if (health >= 0 && health < healthBar.Length)
-            healthBar[health].SetActive(false);
+        if(health >= 0 && health < healthBar.Length){
+            HeartController heartController = healthBar[health].GetComponent<HeartController>();
+            heartController.StartAnimation();
+        }
 
         EnemySpawn enemySpawn = FindAnyObjectByType<EnemySpawn>();
         StartCoroutine(enemySpawn.DelaySpawn(2));
@@ -102,13 +115,10 @@ public class PlayerMovement : MonoBehaviour{
         StartCoroutine(takeDamage.TakeDamageEffect(0.5f));
     }
 
-    public void GameOver()
-    {
-        GameOverPanel.SetActive(true);
-        ScoreCounter.SetActive(true);
-        CanvasScore.SetActive(false);
-        Hearts.SetActive(false);
-        Time.timeScale = 0;
+
+    void GameOver(){
+        Debug.Log("Game Over!");
+        animator.SetTrigger("Death");
     }
     
     IEnumerator ActivateHealthBars(){

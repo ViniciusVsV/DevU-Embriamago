@@ -1,6 +1,8 @@
 using UnityEngine;
 
 public class ProjectileBehaviour : MonoBehaviour{
+    public Animator animator;
+    
     public float speed = 10f;
     public float lifetime = 0.2f;
 
@@ -12,34 +14,20 @@ public class ProjectileBehaviour : MonoBehaviour{
         transform.Translate(speed * Time.deltaTime * Vector3.forward);
     }
 
-    void OnCollisionEnter(Collision collision)
-    {
-        Score score = FindObjectOfType<Score>();
-        AudioController audioController = FindObjectOfType<AudioController>();
+    void OnTriggerEnter(Collider other){
+        if(other.gameObject.CompareTag("Enemy")){
+            EnemyBehaviour enemy = other.gameObject.GetComponent<EnemyBehaviour>();
+            enemy.Die();
 
-        if (audioController != null)
-        {
+            Destroy(gameObject); 
+
+            AudioController audioController = FindAnyObjectByType<AudioController>();
             audioController.playEnemyDeathSound();
-        }
 
+            Score score = FindAnyObjectByType<Score>();
+            score.AddScore();
+        }else{
 
-        //Reduz a pontuação em 500 caso acerte civil
-        if (collision.gameObject.tag == "Civil")
-        {
-            Destroy(collision.gameObject);
-            Destroy(gameObject);
-            score.ReduceScore();
-        }
-        else
-        {
-            //Adiciona 100 pontos caso acerte inimigo
-            if (score != null)
-            {
-                Destroy(collision.gameObject);
-                Destroy(gameObject);
-
-                score.AddScore();
-            }
         }
     }
 }

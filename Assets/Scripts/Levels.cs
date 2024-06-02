@@ -91,8 +91,8 @@ public class Levels : MonoBehaviour{
         SpeedLinesController speedLines = FindAnyObjectByType<SpeedLinesController>();
         speedLines.startSpeedLines(1);
         
-        HeartVibration[] hearts = FindObjectsOfType<HeartVibration>(); 
-        foreach(HeartVibration heart in hearts)
+        HeartController[] hearts = FindObjectsOfType<HeartController>(); 
+        foreach(HeartController heart in hearts)
             heart.vibrate = true;
 
         CameraController cameraController = FindAnyObjectByType<CameraController>();
@@ -143,7 +143,7 @@ public class Levels : MonoBehaviour{
 
         CameraController cameraController = FindAnyObjectByType<CameraController>();
         cameraController.ShakeCamera(1f);
-        cameraController.IncreaseFOV(65f);
+        cameraController.IncreaseFOV(63f);
 
         spawnInterval = 0.2f;
         enemySpeed = 35f;
