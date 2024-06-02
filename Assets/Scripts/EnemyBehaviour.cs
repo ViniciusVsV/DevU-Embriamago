@@ -9,6 +9,8 @@ public class EnemyBehaviour : MonoBehaviour{
     public float targetZ;
     public float targetY;
 
+    public bool isSlime = false;
+
     private Transform target;
     public bool isDying = false;
     
@@ -49,6 +51,11 @@ public class EnemyBehaviour : MonoBehaviour{
             }
 
             Destroy(gameObject, 0.4f);
+
+            if(isSlime == true){
+                EnemySpawn enemySpawn = FindAnyObjectByType<EnemySpawn>();
+                enemySpawn.SlimeDeath();
+            }
         }
     }
 }
