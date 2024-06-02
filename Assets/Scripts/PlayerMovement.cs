@@ -126,6 +126,7 @@ public class PlayerMovement : MonoBehaviour{
 
     IEnumerator PauseGameAfterDelay(float delay){
         allowMove = false;
+        allowShoot = false;
         yield return new WaitForSeconds(delay);
 
         Time.timeScale = 0;

@@ -41,7 +41,7 @@ public class Menu_Manager : MonoBehaviour
         isPaused = false;
         Time.timeScale = 1;
 
-        if (PlayerPrefs.GetInt("TutorialShown") == 2)
+        if (PlayerPrefs.GetInt("TutorialShown") == 1)
         {
             SceneManager.LoadScene("SampleScene");
         }
@@ -94,7 +94,7 @@ public class Menu_Manager : MonoBehaviour
 
     public void GoToHint()
     {
-        if (PlayerPrefs.GetInt("TutorialShown", 0) == 2)
+        if (PlayerPrefs.GetInt("TutorialShown", 0) == 1)
         {
             Hint.SetActive(false);
         } 
@@ -103,7 +103,7 @@ public class Menu_Manager : MonoBehaviour
             Hint.SetActive(true);
             iconsButtons.SetActive(false);
             Tittle.SetActive(false);
-            PlayerPrefs.SetInt("TutorialShown", 2);
+            PlayerPrefs.SetInt("TutorialShown", 1);
             PlayerPrefs.Save();
         }
         

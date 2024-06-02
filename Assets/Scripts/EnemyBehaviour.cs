@@ -51,11 +51,6 @@ public class EnemyBehaviour : MonoBehaviour{
             }
 
             Destroy(gameObject, 0.4f);
-
-            if(isSlime == true){
-                EnemySpawn enemySpawn = FindAnyObjectByType<EnemySpawn>();
-                enemySpawn.SlimeDeath();
-            }
         }
     }
 }

@@ -11050,15 +11050,18 @@ MonoBehaviour:
   - {fileID: 463746825}
   - {fileID: 112399685}
   - {fileID: 1670313245}
-  enemyPrefab0: {fileID: 656832426061958926, guid: cce9ea8400acf214a85630cda50d0854, type: 3}
-  enemyPrefab1: {fileID: 8014289690196936136, guid: c57fc68096ba8324d860371d0eb53c15, type: 3}
-  enemyPrefab2: {fileID: 6879062019577409385, guid: b5ee805632ac48448bfda75c4732e0a4, type: 3}
-  slimePrefab0: {fileID: 6354152944660506415, guid: 06359e9d10bc60e4ea25e5b98718ccd7, type: 3}
-  slimePrefab1: {fileID: 4607679922650466829, guid: 18b30eb959a868549a42e242c18a89a3, type: 3}
-  slimePrefab2: {fileID: 1816232320490796571, guid: 8e1b96a9098e37f4f8541005b1a335d2, type: 3}
-  DividedSlimePrefab0: {fileID: 8315149229832708799, guid: ef891540790524d42ad0b630fdf6308d, type: 3}
-  DividedSlimePrefab1: {fileID: 1282666720500357199, guid: 65be761e7cbd39746af02291aa6ecede, type: 3}
-  DividedSlimePrefab2: {fileID: 6173790019842536800, guid: cb3dd1a9a6eecd546826a45e4e8c01d4, type: 3}
+  commonEnemiesCenter:
+  - {fileID: 1282666720500357199, guid: 65be761e7cbd39746af02291aa6ecede, type: 3}
+  - {fileID: 8014289690196936136, guid: c57fc68096ba8324d860371d0eb53c15, type: 3}
+  commonEnemiesLeft:
+  - {fileID: 8315149229832708799, guid: ef891540790524d42ad0b630fdf6308d, type: 3}
+  - {fileID: 656832426061958926, guid: cce9ea8400acf214a85630cda50d0854, type: 3}
+  commonEnemiesRight:
+  - {fileID: 6173790019842536800, guid: cb3dd1a9a6eecd546826a45e4e8c01d4, type: 3}
+  - {fileID: 6879062019577409385, guid: b5ee805632ac48448bfda75c4732e0a4, type: 3}
+  hardEnemyCenter: {fileID: 4607679922650466829, guid: 18b30eb959a868549a42e242c18a89a3, type: 3}
+  hardEnemyLeft: {fileID: 6354152944660506415, guid: 06359e9d10bc60e4ea25e5b98718ccd7, type: 3}
+  hardEnemyRight: {fileID: 1816232320490796571, guid: 8e1b96a9098e37f4f8541005b1a335d2, type: 3}
 --- !u!4 &650011554
 Transform:
   m_ObjectHideFlags: 0
