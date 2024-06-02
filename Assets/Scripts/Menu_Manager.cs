@@ -13,6 +13,8 @@ public class Menu_Manager : MonoBehaviour
     public GameObject PausePanel;
     public GameObject CanvasScore;
     public GameObject Hearts;
+    public GameObject Hint;
+    public GameObject Tittle;
     public bool isPaused;
 
     void Update()
@@ -32,7 +34,16 @@ public class Menu_Manager : MonoBehaviour
 
     public void Play()
     {
-        SceneManager.LoadScene("SampleScene");
+        if (PlayerPrefs.GetInt("TutorialShown") == 2)
+        {
+            SceneManager.LoadScene("SampleScene");
+            Continue();
+        }
+        else
+        {
+            GoToHint();
+        }
+ 
     }    
     public void OpenSettings()
     {
@@ -49,7 +60,6 @@ public class Menu_Manager : MonoBehaviour
     }    
     public void ExitGame()
     {
-        Debug.Log("Sair do jogo");
         Application.Quit();
     }
 
@@ -73,6 +83,23 @@ public class Menu_Manager : MonoBehaviour
     public void BackToMenu()
     {
         SceneManager.LoadScene("MenuInicial");
+    }
+
+    public void GoToHint()
+    {
+        if (PlayerPrefs.GetInt("TutorialShown", 0) == 2)
+        {
+            Hint.SetActive(false);
+        } 
+        else 
+        {
+            Hint.SetActive(true);
+            iconsButtons.SetActive(false);
+            Tittle.SetActive(false);
+            PlayerPrefs.SetInt("TutorialShown", 2);
+            PlayerPrefs.Save();
+        }
+        
     }
 }
 

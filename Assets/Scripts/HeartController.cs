@@ -1,6 +1,7 @@
 using UnityEngine;
 
-public class HeartController : MonoBehaviour{
+public class HeartController : MonoBehaviour
+{
     public Animator animator;
     public bool vibrate = false;
     private Vector3 originalPosition;

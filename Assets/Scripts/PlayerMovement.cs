@@ -19,7 +19,6 @@ public class PlayerMovement : MonoBehaviour{
     private int currentRouteIndex;
     private float cooldownTimer = 0;
     private bool allowShoot = true;
-    private bool attacking = false;
 
     public int health = 3;
     public GameObject[] healthBar; 
@@ -96,10 +95,11 @@ public class PlayerMovement : MonoBehaviour{
             Instantiate(projectilePrefabCenter, projectileSpawn.position, Quaternion.identity);
         }
     }
-    
+ 
     public void DecreaseHealth(){
         health--;
-        if(health >= 0 && health < healthBar.Length){
+        if(health >= 0 && health < healthBar.Length)
+        {
             HeartController heartController = healthBar[health].GetComponent<HeartController>();
             heartController.StartAnimation();
         }
@@ -116,9 +116,14 @@ public class PlayerMovement : MonoBehaviour{
     }
 
 
-    void GameOver(){
-        Debug.Log("Game Over!");
+    void GameOver()
+    {
+        GameOverPanel.SetActive(true);
+        ScoreCounter.SetActive(true);
+        CanvasScore.SetActive(false);
+        Hearts.SetActive(false);
         animator.SetTrigger("Death");
+        Time.timeScale = 0;
     }
     
     IEnumerator ActivateHealthBars(){
