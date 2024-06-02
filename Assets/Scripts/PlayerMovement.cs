@@ -8,6 +8,10 @@ public class PlayerMovement : MonoBehaviour{
     public GameObject projectilePrefabSide0;
     public GameObject projectilePrefabSide2;
     public Transform projectileSpawn;
+    public GameObject GameOverPanel;
+    public GameObject CanvasScore;
+    public GameObject ScoreCounter;
+    public GameObject Hearts;
 
     private int currentRouteIndex;
     private float cooldownTimer = 0;
@@ -28,9 +32,9 @@ public class PlayerMovement : MonoBehaviour{
         HandleMovement();
         HandleShooting();
 
-        if(health == 0)
+        if(health <= 0)
         {
-            SceneManager.LoadScene("GameOver");
+            GameOver();
         }
     }
 
@@ -61,7 +65,7 @@ public class PlayerMovement : MonoBehaviour{
         Levels levels = FindAnyObjectByType<Levels>();
 
         if(allowShoot == true){
-            if((Input.GetMouseButton(0) && cooldownTimer >= levels.attackCooldown) || (Input.GetKey(KeyCode.Space) && cooldownTimer >= levels.attackCooldown)){
+            if(Input.GetKey(KeyCode.Space) && cooldownTimer >= levels.attackCooldown){
                 cooldownTimer = 0;
                 Shoot();
 
@@ -98,9 +102,13 @@ public class PlayerMovement : MonoBehaviour{
         StartCoroutine(takeDamage.TakeDamageEffect(0.5f));
     }
 
-    void GameOver(){
-        Debug.Log("Game Over!");
-        UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
+    public void GameOver()
+    {
+        GameOverPanel.SetActive(true);
+        ScoreCounter.SetActive(true);
+        CanvasScore.SetActive(false);
+        Hearts.SetActive(false);
+        Time.timeScale = 0;
     }
     
     IEnumerator ActivateHealthBars(){

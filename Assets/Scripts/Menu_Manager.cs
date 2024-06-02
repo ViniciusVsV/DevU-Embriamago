@@ -5,14 +5,30 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class Menu_Manager : MonoBehaviour
 {
-    [SerializeField] private string nome_do_level_jogo;
     [SerializeField] private GameObject painelMenuInicial;
     [SerializeField] private GameObject painelSettings;
     [SerializeField] private GameObject iconsButtons;
 
-    
+
     public GameObject PausePanel;
+    public GameObject CanvasScore;
+    public GameObject Hearts;
     public bool isPaused;
+
+    void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            if(isPaused)
+            {
+                Continue();
+            } 
+            else
+            {
+                Pause();
+            }
+        }
+    }
 
     public void Play()
     {
@@ -21,7 +37,8 @@ public class Menu_Manager : MonoBehaviour
     public void OpenSettings()
     {
         painelSettings.SetActive(true);
-        iconsButtons.SetActive(false);     
+        iconsButtons.SetActive(false);
+        CanvasScore.SetActive(false);     
 
     }
     public void CloseSettings()
@@ -36,33 +53,26 @@ public class Menu_Manager : MonoBehaviour
         Application.Quit();
     }
 
-    void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.Escape))
-        {
-            if(isPaused)
-            {
-                Continue();
-            }
-            else
-            {
-                Pause();                
-            }
-        }
-
-    }
-
     public void Pause()
     {
         Time.timeScale = 0;
         PausePanel.SetActive(true);
+        CanvasScore.SetActive(false);
+        Hearts.SetActive(false);
         isPaused = true;
     }
     public void Continue()
     {
         Time.timeScale = 1;
         PausePanel.SetActive(false);
+        CanvasScore.SetActive(true);
+        Hearts.SetActive(true);
         isPaused = false;
+    }
+
+    public void BackToMenu()
+    {
+        SceneManager.LoadScene("MenuInicial");
     }
 }
 
