@@ -1,6 +1,8 @@
 using UnityEngine;
 
 public class ProjectileBehaviourSides : MonoBehaviour{
+    public Animator animator;
+
     public float targetX;
     public float targetZ;
     public float targetY;
@@ -25,14 +27,20 @@ public class ProjectileBehaviourSides : MonoBehaviour{
         transform.position = newPosition;
     } 
 
-    void OnCollisionEnter(Collision collision){
-        Destroy(collision.gameObject);
-        Destroy(gameObject); 
+    void OnTriggerEnter(Collider obj){
+        if(obj.gameObject.CompareTag("Enemy")){
+            EnemyBehaviour enemy = obj.gameObject.GetComponent<EnemyBehaviour>();
+            enemy.Die();
 
-        AudioController audioController = FindAnyObjectByType<AudioController>();
-        audioController.playEnemyDeathSound();
+            Destroy(gameObject); 
 
-        Score score = FindAnyObjectByType<Score>();
-        score.AddScore();
+            AudioController audioController = FindAnyObjectByType<AudioController>();
+            audioController.playEnemyDeathSound();
+
+            Score score = FindAnyObjectByType<Score>();
+            score.AddScore();
+        }else{
+
+        }
     }
 }

@@ -1,6 +1,8 @@
 using UnityEngine;
 
 public class ProjectileBehaviour : MonoBehaviour{
+    public Animator animator;
+    
     public float speed = 10f;
     public float lifetime = 0.2f;
 
@@ -12,14 +14,20 @@ public class ProjectileBehaviour : MonoBehaviour{
         transform.Translate(speed * Time.deltaTime * Vector3.forward);
     } 
 
-    void OnCollisionEnter(Collision collision){
-        Destroy(collision.gameObject);
-        Destroy(gameObject); 
+    void OnTriggerEnter(Collider other){
+        if(other.gameObject.CompareTag("Enemy")){
+            EnemyBehaviour enemy = other.gameObject.GetComponent<EnemyBehaviour>();
+            enemy.Die();
 
-        AudioController audioController = FindAnyObjectByType<AudioController>();
-        audioController.playEnemyDeathSound();
+            Destroy(gameObject); 
 
-        Score score = FindAnyObjectByType<Score>();
-        score.AddScore();
+            AudioController audioController = FindAnyObjectByType<AudioController>();
+            audioController.playEnemyDeathSound();
+
+            Score score = FindAnyObjectByType<Score>();
+            score.AddScore();
+        }else{
+
+        }
     }
 }

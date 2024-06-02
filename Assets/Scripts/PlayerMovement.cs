@@ -106,6 +106,7 @@ public class PlayerMovement : MonoBehaviour{
         StartCoroutine(takeDamage.TakeDamageEffect(0.5f));
     }
 
+
     void GameOver(){
         Debug.Log("Game Over!");
         animator.SetTrigger("Death");

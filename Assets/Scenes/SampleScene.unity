@@ -10496,9 +10496,9 @@ MonoBehaviour:
   - {fileID: 463746825}
   - {fileID: 112399685}
   - {fileID: 1670313245}
-  enemyPrefab0: {fileID: 5980373380102268817, guid: 3c320991c8be52448a1f4561465e3d06, type: 3}
-  enemyPrefab1: {fileID: 5992195557942319157, guid: 66c0abbfccd6e484da745e0e39e2ae6e, type: 3}
-  enemyPrefab2: {fileID: 7718261828024671817, guid: ffbe1307992bf3a40a4bb7d60683beea, type: 3}
+  enemyPrefab0: {fileID: 656832426061958926, guid: cce9ea8400acf214a85630cda50d0854, type: 3}
+  enemyPrefab1: {fileID: 8014289690196936136, guid: c57fc68096ba8324d860371d0eb53c15, type: 3}
+  enemyPrefab2: {fileID: 6879062019577409385, guid: b5ee805632ac48448bfda75c4732e0a4, type: 3}
 --- !u!4 &650011554
 Transform:
   m_ObjectHideFlags: 0
@@ -11295,7 +11295,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1069572651}
-  - component: {fileID: 1069572652}
   m_Layer: 0
   m_Name: ProjectileSpawn
   m_TagString: Untagged
@@ -11318,33 +11317,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1571957781}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!50 &1069572652
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1069572650}
-  m_BodyType: 1
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!1 &1100831578
 GameObject:
   m_ObjectHideFlags: 0
@@ -11790,7 +11762,6 @@ GameObject:
   - component: {fileID: 1276004003}
   - component: {fileID: 1276004002}
   - component: {fileID: 1276004001}
-  - component: {fileID: 1276004004}
   m_Layer: 0
   m_Name: Heart0
   m_TagString: Untagged
@@ -11878,27 +11849,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &1276004004
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1276004000}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 4afad234f24fec34c94702a591e66d59, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1306860087
 GameObject:
   m_ObjectHideFlags: 0
@@ -17146,9 +17096,9 @@ MonoBehaviour:
   - {fileID: 1588344541}
   - {fileID: 1876691637}
   - {fileID: 460912705}
-  projectilePrefabCenter: {fileID: 618975276533460218, guid: 46c87d009c2e4b24884f8318fe2608d4, type: 3}
-  projectilePrefabSide0: {fileID: 181087369469059827, guid: a01a7fcb54e586649abb2c99960aa446, type: 3}
-  projectilePrefabSide2: {fileID: 1659786653297345216, guid: f076819e8d98fae45984ef80cb1e0280, type: 3}
+  projectilePrefabCenter: {fileID: 6184063932205087751, guid: 6ae3fcf307c28f74499f47a7e2c2edbc, type: 3}
+  projectilePrefabSide0: {fileID: 3942776843207564415, guid: c9191a0c75ac5194bb3cc29822f3a06a, type: 3}
+  projectilePrefabSide2: {fileID: 7212430191177693729, guid: 455534bff04973442a381bd60639f856, type: 3}
   projectileSpawn: {fileID: 1069572651}
   health: 3
   healthBar:
