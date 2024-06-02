@@ -92,8 +92,10 @@ public class PlayerMovement : MonoBehaviour{
     
     public void DecreaseHealth(){
         health--;
-        if (health >= 0 && health < healthBar.Length)
-            healthBar[health].SetActive(false);
+        if(health >= 0 && health < healthBar.Length){
+            HeartController heartController = healthBar[health].GetComponent<HeartController>();
+            heartController.StartAnimation();
+        }
 
         EnemySpawn enemySpawn = FindAnyObjectByType<EnemySpawn>();
         StartCoroutine(enemySpawn.DelaySpawn(2));

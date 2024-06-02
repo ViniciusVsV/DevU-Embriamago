@@ -1,6 +1,7 @@
 using UnityEngine;
 
-public class HeartVibration : MonoBehaviour{
+public class HeartController : MonoBehaviour{
+    public Animator animator;
     public bool vibrate = false;
     private Vector3 originalPosition;
 
@@ -22,5 +23,9 @@ public class HeartVibration : MonoBehaviour{
             
             transform.localPosition = newPosition;
         }
+    }
+
+    public void StartAnimation(){
+        animator.SetTrigger("Lost");
     }
 }
