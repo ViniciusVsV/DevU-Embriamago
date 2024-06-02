@@ -20,6 +20,9 @@ public class PlayerMovement : MonoBehaviour{
     private float cooldownTimer = 0;
     private bool allowShoot = true;
 
+    private bool allowMove = true;
+
+
     public int health = 3;
     public GameObject[] healthBar; 
 
@@ -44,17 +47,17 @@ public class PlayerMovement : MonoBehaviour{
 
     //Mecânica de Movimento do Player
     void HandleMovement(){
-        if(Input.GetKeyDown(KeyCode.A)){
+        if(Input.GetKeyDown(KeyCode.A) && allowMove){
             currentRouteIndex = 0;
             StartCoroutine(MoveAfterDelay());
         }
 
-        else if(Input.GetKeyDown(KeyCode.S)){
+        else if(Input.GetKeyDown(KeyCode.S) && allowMove){
             currentRouteIndex = 1;
             StartCoroutine(MoveAfterDelay());
         }
 
-        else if(Input.GetKeyDown(KeyCode.D)){
+        else if(Input.GetKeyDown(KeyCode.D) && allowMove){
             currentRouteIndex = 2;
             StartCoroutine(MoveAfterDelay());
         }
@@ -115,15 +118,20 @@ public class PlayerMovement : MonoBehaviour{
         StartCoroutine(takeDamage.TakeDamageEffect(0.5f));
     }
 
+    void GameOver(){
+        animator.SetTrigger("Death");
 
-    void GameOver()
-    {
+        StartCoroutine(PauseGameAfterDelay(1.5f));
+    }
+
+    IEnumerator PauseGameAfterDelay(float delay){
+        allowMove = false;
+        yield return new WaitForSeconds(delay);
+
+        Time.timeScale = 0;
         GameOverPanel.SetActive(true);
         ScoreCounter.SetActive(true);
         CanvasScore.SetActive(false);
-        Hearts.SetActive(false);
-        animator.SetTrigger("Death");
-        Time.timeScale = 0;
     }
     
     IEnumerator ActivateHealthBars(){

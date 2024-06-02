@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class Score : MonoBehaviour{
     public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI scoreTextMenuGameOver;
 
     private int scoreValue;
 
@@ -37,14 +38,10 @@ public class Score : MonoBehaviour{
             levels.levelTransition(5);
         }
     }
-    public void ReduceScore()
-    {
-        scoreValue -= 500;
-        UpdateScoreText();
-    }
 
    void UpdateScoreText(){
         scoreText.text = "" + scoreValue.ToString();
+        scoreTextMenuGameOver.text = "" + scoreValue.ToString();
     }
 
     public int getScore(){

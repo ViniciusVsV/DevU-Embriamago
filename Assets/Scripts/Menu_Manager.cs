@@ -12,11 +12,15 @@ public class Menu_Manager : MonoBehaviour
 
     public GameObject PausePanel;
     public GameObject CanvasScore;
-    public GameObject Hearts;
     public GameObject Hint;
     public GameObject Tittle;
     public bool isPaused;
 
+    void Start()
+    {
+        Time.timeScale = 1;
+        isPaused = false;
+    }
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.Escape))
@@ -34,16 +38,19 @@ public class Menu_Manager : MonoBehaviour
 
     public void Play()
     {
+        isPaused = false;
+        Time.timeScale = 1;
+
         if (PlayerPrefs.GetInt("TutorialShown") == 2)
         {
             SceneManager.LoadScene("SampleScene");
-            Continue();
         }
         else
         {
             GoToHint();
         }
- 
+
+        Continue();
     }    
     public void OpenSettings()
     {
@@ -68,7 +75,6 @@ public class Menu_Manager : MonoBehaviour
         Time.timeScale = 0;
         PausePanel.SetActive(true);
         CanvasScore.SetActive(false);
-        Hearts.SetActive(false);
         isPaused = true;
     }
     public void Continue()
@@ -76,13 +82,14 @@ public class Menu_Manager : MonoBehaviour
         Time.timeScale = 1;
         PausePanel.SetActive(false);
         CanvasScore.SetActive(true);
-        Hearts.SetActive(true);
         isPaused = false;
     }
 
     public void BackToMenu()
     {
+        PausePanel.SetActive(false);
         SceneManager.LoadScene("MenuInicial");
+        
     }
 
     public void GoToHint()
