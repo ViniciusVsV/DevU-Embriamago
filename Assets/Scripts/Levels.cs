@@ -16,7 +16,7 @@ public class Levels : MonoBehaviour{
     public TMP_Text text5;
   
     void Start(){
-        StartCoroutine(setDificultyStart(startingText.gameObject, 4f));
+        StartCoroutine(setDificultyStart(startingText.gameObject));
     }
 
     public void levelTransition(int selector){
@@ -25,24 +25,24 @@ public class Levels : MonoBehaviour{
         
         switch(selector){
             case 1:
-                StartCoroutine(setDificultyEasy(text1.gameObject, 4f));
+                StartCoroutine(setDificultyEasy(text1.gameObject));
                 break;
             case 2:
-                StartCoroutine(setDificultyModerate(text2.gameObject, 4f));
+                StartCoroutine(setDificultyModerate(text2.gameObject));
                 break;
             case 3:
-                StartCoroutine(setDificultyHard(text3.gameObject, 4f));
+                StartCoroutine(setDificultyHard(text3.gameObject));
                 break;
             case 4:
-                StartCoroutine(setDificultyInsane(text4.gameObject, 4f));
+                StartCoroutine(setDificultyInsane(text4.gameObject));
                 break;
             case 5:
-                StartCoroutine(setDificultyImpossible(text5.gameObject, 4f));
+                StartCoroutine(setDificultyImpossible(text5.gameObject));
                 break;
         }
     }
 
-    IEnumerator setDificultyStart(GameObject obj, float delay){
+    IEnumerator setDificultyStart(GameObject obj){
         spawnInterval = 1.6f;
         enemySpeed = 8f;
         attackCooldown = 0.8f;
@@ -53,7 +53,7 @@ public class Levels : MonoBehaviour{
         obj.SetActive(false);
     }
 
-    IEnumerator setDificultyEasy(GameObject obj, float delay){
+    IEnumerator setDificultyEasy(GameObject obj){
         obj.SetActive(true);
         yield return new WaitForSeconds(4f);
         obj.SetActive(false);
@@ -64,7 +64,7 @@ public class Levels : MonoBehaviour{
         moveDelay = 0.3f;
     }
 
-    IEnumerator setDificultyModerate(GameObject obj, float delay){
+    IEnumerator setDificultyModerate(GameObject obj){
         obj.SetActive(true);
         yield return new WaitForSeconds(4f);
         obj.SetActive(false);
@@ -78,7 +78,7 @@ public class Levels : MonoBehaviour{
         moveDelay = 0.2f;
     }
     
-    IEnumerator setDificultyHard(GameObject obj, float delay){
+    IEnumerator setDificultyHard(GameObject obj){
         AudioController audioController = FindAnyObjectByType<AudioController>();
         StartCoroutine(audioController.stopMusic());
 
@@ -105,7 +105,7 @@ public class Levels : MonoBehaviour{
         moveDelay = 0.1f;
     }
 
-    IEnumerator setDificultyInsane(GameObject obj, float delay){
+    IEnumerator setDificultyInsane(GameObject obj){
         AudioController audioController = FindAnyObjectByType<AudioController>();
         StartCoroutine(audioController.stopMusic());
 
@@ -128,10 +128,15 @@ public class Levels : MonoBehaviour{
         moveDelay = 0f;
     }
 
-    IEnumerator setDificultyImpossible(GameObject obj, float delay){
+    IEnumerator setDificultyImpossible(GameObject obj){
+        AudioController audioController = FindAnyObjectByType<AudioController>();
+        StartCoroutine(audioController.stopMusic());
+
         obj.SetActive(true);
         yield return new WaitForSeconds(4f);
         obj.SetActive(false);
+
+        audioController.setMusicInsane();
 
         SpeedLinesController speedLines = FindAnyObjectByType<SpeedLinesController>();
         speedLines.startSpeedLines(3);

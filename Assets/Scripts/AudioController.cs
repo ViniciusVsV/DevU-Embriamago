@@ -11,6 +11,7 @@ public class AudioController : MonoBehaviour{
     public AudioClip musicNormal;
     public AudioClip musicFast;
     public AudioClip musicInsane;
+    public AudioClip musicImpossible;
     public AudioClip attackSound;
     public AudioClip hitSound;
     public AudioClip enemyDeathSound;
@@ -29,6 +30,12 @@ public class AudioController : MonoBehaviour{
 
     public void setMusicInsane(){
         musicEffect.clip = musicInsane;
+        musicEffect.loop = true;
+        musicEffect.Play();
+    }
+
+    public void setMusicImpossible(){
+        musicEffect.clip = musicImpossible;
         musicEffect.loop = true;
         musicEffect.Play();
     }
