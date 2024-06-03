@@ -12,15 +12,17 @@ public class EnemySpawn : MonoBehaviour{
 
     private float spawnTimer = 0f;
     private bool wait = false;
-    private int apenasum = 0;
+    private int qtdSlime;
     
 
     void Update(){
+        GameObject[] allSlimes = GameObject.FindGameObjectsWithTag("Slime");
+        qtdSlime = allSlimes.Length;
+
         Spawn();
     }
     
     void Spawn(){
-        
         if (wait == true){
             
         }else{
@@ -28,39 +30,31 @@ public class EnemySpawn : MonoBehaviour{
             spawnTimer += Time.deltaTime;
 
 
-            if (spawnTimer >= levels.spawnInterval)
-            {
+            if (spawnTimer >= levels.spawnInterval){
                 spawnTimer = 0f;
 
                 int spawnIndex = Random.Range(0, spawnPoints.Length);
                 int type = Random.Range(0, 2);
-                int pai = Random.Range(0, 9);
+                int pai = Random.Range(0, 14);
 
                 Transform spawnPoint = spawnPoints[spawnIndex];
                 Score score = FindAnyObjectByType<Score>();
-                SlimeHealth slimehealth = gameObject.GetComponent<SlimeHealth>();
 
-                if (score.scoreValue >= 3500)
+                if (score.scoreValue >= 30000)
                     pai = 1;
 
-                if (pai == 0 && apenasum < 3)
-                {
+                if (pai == 0 && qtdSlime < 2){
                     GameObject slime;
 
 
-                    if (spawnIndex == 0)
-                    {
+                    if (spawnIndex == 0){
                         slime = Instantiate(hardEnemyLeft, spawnPoint.position, Quaternion.identity);
-                        apenasum++;
                     }
-                    if (spawnIndex == 1)
-                    {
+                    if (spawnIndex == 1){
                         slime = Instantiate(hardEnemyCenter, spawnPoint.position, Quaternion.identity);
-                        apenasum++;
                     }
-                    if (spawnIndex == 2) { 
+                    if (spawnIndex == 2){ 
                         slime = Instantiate(hardEnemyRight, spawnPoint.position, Quaternion.identity);
-                        apenasum++;
                     }
 
                 }

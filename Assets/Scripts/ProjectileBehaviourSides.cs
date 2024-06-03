@@ -8,7 +8,7 @@ public class ProjectileBehaviourSides : MonoBehaviour {
     public float targetZ;
     public float targetY;
     public float speed = 10f;
-    public float lifetime = 0.2f;
+    public float lifetime = 0.8f;
     public int health = 0;
 
     private Transform target;
@@ -29,28 +29,12 @@ public class ProjectileBehaviourSides : MonoBehaviour {
         transform.position = newPosition;
     }
 
-    void OnTriggerEnter(Collider obj) {
-        if (obj.gameObject.CompareTag("Enemy"))
-        {
-            EnemyBehaviour enemy = obj.gameObject.GetComponent<EnemyBehaviour>();
-            enemy.Die();
+    void OnTriggerEnter(Collider other){
+        if(other.gameObject.CompareTag("Enemy") || other.gameObject.CompareTag("Slime")){
+            EnemyBehaviour enemy = other.gameObject.GetComponent<EnemyBehaviour>();
+            enemy.TakeDamage();
 
             Destroy(gameObject);
-
-            AudioController audioController = FindAnyObjectByType<AudioController>();
-            audioController.playEnemyDeathSound();
-
-            Score score = FindAnyObjectByType<Score>();
-            score.AddScore();
         }
-        else {
-            health++;
-            if (health <= 2)
-            {
-                EnemyBehaviour enemy = obj.gameObject.GetComponent<EnemyBehaviour>();
-                enemy.TakeDamage();
-            }
-        }
-        
-    } 
+    }
 }

@@ -10,7 +10,7 @@ public class EnemyBehaviour : MonoBehaviour{
     public float targetY;
 
     public bool isSlime = false;
-    public int health = 2;
+    private int health = 1;
 
     private Transform target;
     public bool isDying = false;
@@ -28,6 +28,7 @@ public class EnemyBehaviour : MonoBehaviour{
     void Update(){
         if(isDying == false){
             Levels levels = FindAnyObjectByType<Levels>();
+
             Vector3 newPosition = Vector3.MoveTowards(transform.position, target.position, levels.enemySpeed * Time.deltaTime);
             transform.position = newPosition;
 
@@ -45,25 +46,17 @@ public class EnemyBehaviour : MonoBehaviour{
     
 
 
-    public void TakeDamage()
-    {
+    public void TakeDamage(){
         health--;
-        if (health <= 0)
-        { 
-            EnemyBehaviour enemy = gameObject.GetComponent<EnemyBehaviour>();
-            enemy.Die();
-
+        if (health <= 0){ 
             AudioController audioController = FindAnyObjectByType<AudioController>();
             audioController.playEnemyDeathSound();
 
-            Score score = FindAnyObjectByType<Score>();
-            score.AddScore();
+            Die();
         }
     }
 
     public void Die(){
-        
-        
         if (!isDying) {
             animator.SetTrigger("Death");
             isDying = true;
@@ -74,6 +67,9 @@ public class EnemyBehaviour : MonoBehaviour{
             }
 
             Destroy(gameObject, 0.4f);
+
+            Score score = FindAnyObjectByType<Score>();
+            score.AddScore();
         }
     }
 }

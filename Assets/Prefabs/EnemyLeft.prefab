@@ -105,6 +105,7 @@ MonoBehaviour:
   targetZ: -9.872
   targetY: 0.62
   isSlime: 0
+  health: 1
   isDying: 0
 --- !u!65 &4004650568624029957
 BoxCollider:
