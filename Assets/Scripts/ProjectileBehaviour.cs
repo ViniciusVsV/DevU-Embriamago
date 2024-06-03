@@ -5,6 +5,7 @@ public class ProjectileBehaviour : MonoBehaviour{
     
     public float speed = 10f;
     public float lifetime = 0.2f;
+  
 
     void Start(){
         Destroy(gameObject, lifetime);
@@ -28,12 +29,10 @@ public class ProjectileBehaviour : MonoBehaviour{
             Score score = FindAnyObjectByType<Score>();
             score.AddScore();
         }
-        else
-        {
-            Destroy(gameObject);
-            SlimeHealth slimeHealth = FindAnyObjectByType<SlimeHealth>();
-            slimeHealth.TakeDamage();
-            
+        else{
+            EnemyBehaviour enemy = other.gameObject.GetComponent<EnemyBehaviour>();
+            enemy.TakeDamage();
         }
+
     }
 }

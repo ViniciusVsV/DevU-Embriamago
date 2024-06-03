@@ -12,14 +12,16 @@ public class EnemySpawn : MonoBehaviour{
 
     private float spawnTimer = 0f;
     private bool wait = false;
- 
+    private int apenasum = 0;
+    
 
     void Update(){
         Spawn();
     }
-
+    
     void Spawn(){
-        if(wait == true){
+        
+        if (wait == true){
             
         }else{
             Levels levels = FindAnyObjectByType<Levels>();
@@ -32,24 +34,34 @@ public class EnemySpawn : MonoBehaviour{
 
                 int spawnIndex = Random.Range(0, spawnPoints.Length);
                 int type = Random.Range(0, 2);
-                int pai =  Random.Range(0, 19);
+                int pai = Random.Range(0, 9);
 
                 Transform spawnPoint = spawnPoints[spawnIndex];
                 Score score = FindAnyObjectByType<Score>();
+                SlimeHealth slimehealth = gameObject.GetComponent<SlimeHealth>();
+
                 if (score.scoreValue >= 3500)
                     pai = 1;
 
-                if (pai == 0)
+                if (pai == 0 && apenasum < 3)
                 {
-                    GameObject hard;
+                    GameObject slime;
+
 
                     if (spawnIndex == 0)
-                        hard = Instantiate(hardEnemyLeft, spawnPoint.position, Quaternion.identity);
+                    {
+                        slime = Instantiate(hardEnemyLeft, spawnPoint.position, Quaternion.identity);
+                        apenasum++;
+                    }
                     if (spawnIndex == 1)
-                        hard = Instantiate(hardEnemyCenter, spawnPoint.position, Quaternion.identity);
-                    if (spawnIndex == 2)
-                        hard = Instantiate(hardEnemyRight, spawnPoint.position, Quaternion.identity);
-
+                    {
+                        slime = Instantiate(hardEnemyCenter, spawnPoint.position, Quaternion.identity);
+                        apenasum++;
+                    }
+                    if (spawnIndex == 2) { 
+                        slime = Instantiate(hardEnemyRight, spawnPoint.position, Quaternion.identity);
+                        apenasum++;
+                    }
 
                 }
                 else {

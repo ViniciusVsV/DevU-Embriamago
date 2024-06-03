@@ -113,6 +113,11 @@ public class PlayerMovement : MonoBehaviour{
         GameObject[] allEnemies = GameObject.FindGameObjectsWithTag("Enemy");
         foreach(GameObject enemy in allEnemies)
             Destroy(enemy);
+        GameObject[] allSlime = GameObject.FindGameObjectsWithTag("Slime");
+        foreach (GameObject slime in allSlime)
+            Destroy(slime);
+        
+
 
         DamageController takeDamage = FindAnyObjectByType<DamageController>();
         StartCoroutine(takeDamage.TakeDamageEffect(0.5f));

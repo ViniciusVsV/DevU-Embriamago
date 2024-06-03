@@ -1,7 +1,7 @@
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class ProjectileBehaviourSides : MonoBehaviour{
+public class ProjectileBehaviourSides : MonoBehaviour {
     public Animator animator;
 
     public float targetX;
@@ -9,26 +9,27 @@ public class ProjectileBehaviourSides : MonoBehaviour{
     public float targetY;
     public float speed = 10f;
     public float lifetime = 0.2f;
+    public int health = 0;
 
     private Transform target;
 
-    void Start(){
+    void Start() {
         Destroy(gameObject, lifetime);
 
         GameObject targetObject = new GameObject("Target");
-        targetObject.transform.position = new Vector3(targetX, targetY , targetZ);
+        targetObject.transform.position = new Vector3(targetX, targetY, targetZ);
 
         target = targetObject.transform;
         Destroy(targetObject, lifetime);
     }
 
-    void Update(){ 
+    void Update() {
         Vector3 newPosition = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
 
         transform.position = newPosition;
     }
 
-    void OnTriggerEnter(Collider obj){
+    void OnTriggerEnter(Collider obj) {
         if (obj.gameObject.CompareTag("Enemy"))
         {
             EnemyBehaviour enemy = obj.gameObject.GetComponent<EnemyBehaviour>();
@@ -42,11 +43,14 @@ public class ProjectileBehaviourSides : MonoBehaviour{
             Score score = FindAnyObjectByType<Score>();
             score.AddScore();
         }
-        else
-        {
-            Destroy(gameObject);
-            SlimeHealth slimeHealth = FindAnyObjectByType<SlimeHealth>();
-            slimeHealth.TakeDamage();
+        else {
+            health++;
+            if (health <= 2)
+            {
+                EnemyBehaviour enemy = obj.gameObject.GetComponent<EnemyBehaviour>();
+                enemy.TakeDamage();
+            }
         }
-        }
+        
+    } 
 }

@@ -10,12 +10,14 @@ public class EnemyBehaviour : MonoBehaviour{
     public float targetY;
 
     public bool isSlime = false;
+    public int health = 2;
 
     private Transform target;
     public bool isDying = false;
     
     void Start(){
-
+        if(isSlime == true)
+            health = 2;
         GameObject targetObject = new GameObject("Target");
         targetObject.transform.position = new Vector3(targetX, targetY , targetZ);
 
@@ -29,12 +31,6 @@ public class EnemyBehaviour : MonoBehaviour{
             Vector3 newPosition = Vector3.MoveTowards(transform.position, target.position, levels.enemySpeed * Time.deltaTime);
             transform.position = newPosition;
 
-        if (isSlime == false) {
-            newPosition = Vector3.MoveTowards(transform.position, target.position,levels.enemySpeed * Time.deltaTime);
-            transform.position = newPosition;
-
-        }
-
             if(transform.position.z <= -8.862){
                 PlayerMovement player = FindObjectOfType<PlayerMovement>();
                 player.DecreaseHealth();
@@ -44,6 +40,24 @@ public class EnemyBehaviour : MonoBehaviour{
 
                 Destroy(gameObject);
             }
+        }
+    }
+    
+
+
+    public void TakeDamage()
+    {
+        health--;
+        if (health <= 0)
+        { 
+            EnemyBehaviour enemy = gameObject.GetComponent<EnemyBehaviour>();
+            enemy.Die();
+
+            AudioController audioController = FindAnyObjectByType<AudioController>();
+            audioController.playEnemyDeathSound();
+
+            Score score = FindAnyObjectByType<Score>();
+            score.AddScore();
         }
     }
 

@@ -19,21 +19,21 @@ public class Score : MonoBehaviour{
 
         Levels levels = FindAnyObjectByType<Levels>();
 
-        if(scoreValue >= 500 && scoreValue <= 700){
+        if(scoreValue == 500){
             levels.levelTransition(1);
         }
-        else if(scoreValue >= 3500 && scoreValue <= 3700){
+        else if(scoreValue == 3500){
             levels.levelTransition(2);
         }
-        else if(scoreValue >= 10000 && scoreValue <= 10200)
+        else if(scoreValue == 10000)
         {
             levels.levelTransition(3);
         }
-        else if(scoreValue >= 30000 && scoreValue <= 30200)
+        else if(scoreValue == 30000)
         {
             levels.levelTransition(4);
         }
-        else if(scoreValue >= 100000 && scoreValue <= 100200)
+        else if(scoreValue == 100000)
         {
             levels.levelTransition(5);
         }
