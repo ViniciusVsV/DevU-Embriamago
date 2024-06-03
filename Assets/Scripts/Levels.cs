@@ -100,7 +100,7 @@ public class Levels : MonoBehaviour{
         cameraController.IncreaseFOV(61f);
 
         spawnInterval = 0.5f;
-        enemySpeed = 30f;
+        enemySpeed = 25f;
         attackCooldown = 0.2f;
         moveDelay = 0.1f;
     }
@@ -123,9 +123,9 @@ public class Levels : MonoBehaviour{
         cameraController.IncreaseFOV(62f);
 
         spawnInterval = 0.25f;
-        enemySpeed = 35f;
-        attackCooldown = 0.2f;
-        moveDelay = 0.1f;
+        enemySpeed = 30f;
+        attackCooldown = 0.1f;
+        moveDelay = 0.05f;
     }
 
     IEnumerator setDificultyImpossible(GameObject obj){
@@ -145,9 +145,9 @@ public class Levels : MonoBehaviour{
         cameraController.ShakeCamera(1f);
         cameraController.IncreaseFOV(63f);
 
-        spawnInterval = 0.125f;
+        spawnInterval = 0.2f;
         enemySpeed = 40f;
-        attackCooldown = 0.2f;
-        moveDelay = 0.1f;
+        attackCooldown = 0.1f;
+        moveDelay = 0f;
     }
 }
