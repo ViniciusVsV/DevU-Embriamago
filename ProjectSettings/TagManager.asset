@@ -8,11 +8,14 @@ TagManager:
   - Route0
   - Route1
   - Route2
+  - SecondaryCamera
+  - Slime
+  - projetil
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - PostProcessing
   - Water
   - UI
   - 

@@ -1,8 +1,11 @@
 using UnityEngine;
 
 public class ProjectileBehaviour : MonoBehaviour{
+    public Animator animator;
+    
     public float speed = 10f;
-    public float lifetime = 2f;
+    public float lifetime = 1f;
+  
 
     void Start(){
         Destroy(gameObject, lifetime);
@@ -10,13 +13,14 @@ public class ProjectileBehaviour : MonoBehaviour{
 
     void Update(){ 
         transform.Translate(speed * Time.deltaTime * Vector3.forward);
-    } 
+    }
 
-    void OnCollisionEnter(Collision collision){
-        Destroy(collision.gameObject);
-        Destroy(gameObject); 
+    void OnTriggerEnter(Collider other){
+        if(other.gameObject.CompareTag("Enemy") || other.gameObject.CompareTag("Slime")){
+            EnemyBehaviour enemy = other.gameObject.GetComponent<EnemyBehaviour>();
+            enemy.TakeDamage();
 
-        Score score = FindAnyObjectByType<Score>();
-        score.AddScore();
+            Destroy(gameObject);
+        }
     }
 }

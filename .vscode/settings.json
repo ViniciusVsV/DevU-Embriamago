@@ -51,5 +51,6 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "embriamago.sln"
+    "dotnet.defaultSolution": "embriamago.sln",
+    "dotnet.preferCSharpExtension": true
 }
