@@ -43,10 +43,10 @@ public class Levels : MonoBehaviour{
     }
 
     IEnumerator setDificultyStart(GameObject obj){
-        spawnInterval = 1.6f;
-        enemySpeed = 8f;
-        attackCooldown = 0.6f;
-        moveDelay = 0.4f;
+        spawnInterval = 2f;
+        enemySpeed = 10f;
+        attackCooldown = 0.4f;
+        moveDelay = 0.2f;
 
         obj.SetActive(true);
         yield return new WaitForSeconds(4f);
@@ -58,10 +58,10 @@ public class Levels : MonoBehaviour{
         yield return new WaitForSeconds(4f);
         obj.SetActive(false);
 
-        spawnInterval = 1f;
-        enemySpeed = 16f;
-        attackCooldown = 0.5f;
-        moveDelay = 0.3f;
+        spawnInterval = 1.5f;
+        enemySpeed = 15f;
+        attackCooldown = 0.4f;
+        moveDelay = 0.2f;
     }
 
     IEnumerator setDificultyModerate(GameObject obj){
@@ -72,9 +72,9 @@ public class Levels : MonoBehaviour{
         TextWobble textWobble = FindAnyObjectByType<TextWobble>();
         textWobble.wobble = true;
 
-        spawnInterval = 0.7f;
-        enemySpeed = 17f;
-        attackCooldown = 0.5f;
+        spawnInterval = 1f;
+        enemySpeed = 20f;
+        attackCooldown = 0.4f;
         moveDelay = 0.2f;
     }
     
@@ -99,9 +99,9 @@ public class Levels : MonoBehaviour{
         cameraController.ShakeCamera(0.2f);
         cameraController.IncreaseFOV(61f);
 
-        spawnInterval = 0.4f;
-        enemySpeed = 18f;
-        attackCooldown = 0.3f;
+        spawnInterval = 0.5f;
+        enemySpeed = 30f;
+        attackCooldown = 0.2f;
         moveDelay = 0.1f;
     }
 
@@ -122,10 +122,10 @@ public class Levels : MonoBehaviour{
         cameraController.ShakeCamera(0.6f);
         cameraController.IncreaseFOV(62f);
 
-        spawnInterval = 0.2f;
-        enemySpeed = 23f;
-        attackCooldown = 0.1f;
-        moveDelay = 0f;
+        spawnInterval = 0.25f;
+        enemySpeed = 35f;
+        attackCooldown = 0.2f;
+        moveDelay = 0.1f;
     }
 
     IEnumerator setDificultyImpossible(GameObject obj){
@@ -145,9 +145,9 @@ public class Levels : MonoBehaviour{
         cameraController.ShakeCamera(1f);
         cameraController.IncreaseFOV(63f);
 
-        spawnInterval = 0.2f;
-        enemySpeed = 35f;
-        attackCooldown = 0.1f;
-        moveDelay = 0f;
+        spawnInterval = 0.125f;
+        enemySpeed = 40f;
+        attackCooldown = 0.2f;
+        moveDelay = 0.1f;
     }
 }

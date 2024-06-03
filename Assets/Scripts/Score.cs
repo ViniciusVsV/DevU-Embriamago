@@ -22,14 +22,14 @@ public class Score : MonoBehaviour{
         if(scoreValue == 500){
             levels.levelTransition(1);
         }
-        else if(scoreValue == 3500){
+        else if(scoreValue == 1000){
             levels.levelTransition(2);
         }
         else if(scoreValue == 10000)
         {
             levels.levelTransition(3);
         }
-        else if(scoreValue == 30000)
+        else if(scoreValue == 25000)
         {
             levels.levelTransition(4);
         }
