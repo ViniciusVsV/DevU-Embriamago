@@ -45,7 +45,7 @@ public class Levels : MonoBehaviour{
     IEnumerator setDificultyStart(GameObject obj){
         spawnInterval = 1.6f;
         enemySpeed = 8f;
-        attackCooldown = 0.8f;
+        attackCooldown = 0.6f;
         moveDelay = 0.4f;
 
         obj.SetActive(true);
@@ -60,7 +60,7 @@ public class Levels : MonoBehaviour{
 
         spawnInterval = 1f;
         enemySpeed = 16f;
-        attackCooldown = 0.6f;
+        attackCooldown = 0.5f;
         moveDelay = 0.3f;
     }
 

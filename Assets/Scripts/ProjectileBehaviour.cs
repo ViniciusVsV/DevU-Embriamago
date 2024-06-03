@@ -15,19 +15,25 @@ public class ProjectileBehaviour : MonoBehaviour{
     }
 
     void OnTriggerEnter(Collider other){
-        if(other.gameObject.CompareTag("Enemy")){
+        if (other.gameObject.CompareTag("Enemy"))
+        {
             EnemyBehaviour enemy = other.gameObject.GetComponent<EnemyBehaviour>();
             enemy.Die();
 
-            Destroy(gameObject); 
+            Destroy(gameObject);
 
             AudioController audioController = FindAnyObjectByType<AudioController>();
             audioController.playEnemyDeathSound();
 
             Score score = FindAnyObjectByType<Score>();
             score.AddScore();
-        }else{
-
+        }
+        else
+        {
+            Destroy(gameObject);
+            SlimeHealth slimeHealth = FindAnyObjectByType<SlimeHealth>();
+            slimeHealth.TakeDamage();
+            
         }
     }
 }

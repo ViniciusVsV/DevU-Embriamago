@@ -9,6 +9,7 @@ TagManager:
   - Route1
   - Route2
   - SecondaryCamera
+  - Slime
   layers:
   - Default
   - TransparentFX

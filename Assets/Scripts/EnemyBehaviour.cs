@@ -15,6 +15,7 @@ public class EnemyBehaviour : MonoBehaviour{
     public bool isDying = false;
     
     void Start(){
+
         GameObject targetObject = new GameObject("Target");
         targetObject.transform.position = new Vector3(targetX, targetY , targetZ);
 
@@ -27,6 +28,12 @@ public class EnemyBehaviour : MonoBehaviour{
             Levels levels = FindAnyObjectByType<Levels>();
             Vector3 newPosition = Vector3.MoveTowards(transform.position, target.position, levels.enemySpeed * Time.deltaTime);
             transform.position = newPosition;
+
+        if (isSlime == false) {
+            newPosition = Vector3.MoveTowards(transform.position, target.position,levels.enemySpeed * Time.deltaTime);
+            transform.position = newPosition;
+
+        }
 
             if(transform.position.z <= -8.862){
                 PlayerMovement player = FindObjectOfType<PlayerMovement>();
@@ -41,6 +48,8 @@ public class EnemyBehaviour : MonoBehaviour{
     }
 
     public void Die(){
+        
+        
         if (!isDying) {
             animator.SetTrigger("Death");
             isDying = true;

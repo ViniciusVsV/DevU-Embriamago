@@ -6,7 +6,7 @@ public class Score : MonoBehaviour{
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI scoreTextMenuGameOver;
 
-    private int scoreValue;
+    public int scoreValue;
 
     void Start(){
         scoreValue = 0;
