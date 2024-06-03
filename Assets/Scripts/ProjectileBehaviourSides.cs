@@ -8,7 +8,7 @@ public class ProjectileBehaviourSides : MonoBehaviour {
     public float targetZ;
     public float targetY;
     public float speed = 10f;
-    public float lifetime = 0.8f;
+    public float lifetime = 1f;
     public int health = 0;
 
     private Transform target;

@@ -48,10 +48,11 @@ public class EnemyBehaviour : MonoBehaviour{
 
     public void TakeDamage(){
         health--;
-        if (health <= 0){ 
-            AudioController audioController = FindAnyObjectByType<AudioController>();
-            audioController.playEnemyDeathSound();
 
+        AudioController audioController = FindAnyObjectByType<AudioController>();
+        audioController.playEnemyDeathSound();
+
+        if (health <= 0){ 
             Die();
         }
     }

@@ -4,7 +4,7 @@ public class ProjectileBehaviour : MonoBehaviour{
     public Animator animator;
     
     public float speed = 10f;
-    public float lifetime = 0.8f;
+    public float lifetime = 1f;
   
 
     void Start(){
