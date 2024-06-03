@@ -136,7 +136,7 @@ public class Levels : MonoBehaviour{
         yield return new WaitForSeconds(4f);
         obj.SetActive(false);
 
-        audioController.setMusicInsane();
+        audioController.setMusicImpossible();
 
         SpeedLinesController speedLines = FindAnyObjectByType<SpeedLinesController>();
         speedLines.startSpeedLines(3);
